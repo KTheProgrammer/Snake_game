@@ -1,0 +1,31 @@
+from turtle import Turtle, Screen
+import time
+
+screen = Screen()
+screen.title("Snake Game")
+screen.setup(width=600, height=600)
+screen.bgcolor("green")
+screen.tracer(0)
+x_cord = [0, -20, -40]
+snake_list = []
+
+for snakes in range(3):
+    snake1 = Turtle(shape="square")
+    snake1.penup()
+    snake1.goto(x=x_cord[snakes], y=0)
+    snake_list.append(snake1)
+
+still_playing = True
+while still_playing:
+    screen.update()
+    time.sleep(0.1)
+    for snake_num in range(len(snake_list) - 1, 0, -1):
+        new_x = snake_list[snake_num - 1].xcor()
+        new_y = snake_list[snake_num - 1].ycor()
+        snake_list[snake_num].goto(new_x, new_y)
+
+    snake_list[0].forward(20)
+
+
+
+screen.exitonclick()
