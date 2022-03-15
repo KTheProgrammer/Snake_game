@@ -1,6 +1,6 @@
 from turtle import Turtle
 
-X_CORD = [0, -20, -40]
+SNAKE_CORD = [(0, 0), (-20, 0), (-40, 0)]
 MOVEMENT = 20
 UP = 90
 DOWN = 270
@@ -14,11 +14,18 @@ class Snake:
         self.make_snake()
 
     def make_snake(self):
-        for snakes in range(3):
-            snake1 = Turtle(shape="square")
-            snake1.penup()
-            snake1.goto(x=X_CORD[snakes], y=0)
-            self.snake_list.append(snake1)
+        for snakes in SNAKE_CORD:
+            self.add_snake(snakes)
+
+    def add_snake(self, snakes):
+        snake1 = Turtle(shape="square")
+        snake1.penup()
+        snake1.goto(snakes)
+        self.snake_list.append(snake1)
+
+    def extend(self):
+        # add new snake length
+        self.add_snake(self.snake_list[-1].position())
 
     def move(self):
         for snake_num in range(len(self.snake_list) - 1, 0, -1):
